@@ -1,0 +1,18 @@
+.navbar {
+    background-color: #f1faee !important; /* Override Bootstrap default */
+}
+.btn-primary {
+    background-color: #a8dadc;
+    border-color: #a8dadc;
+}
+.btn-primary:hover {
+    background-color: #457b9d;
+    border-color: #457b9d;
+}
+.card {
+    border: 1px solid #e0e0e0;
+}
+.card-title {
+    color: #1d3557;
+}
+/* ... other styles */
