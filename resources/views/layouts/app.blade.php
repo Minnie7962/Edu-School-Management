@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Edu-School-Management') }}</title>
+    <title>{{ config('app.name', 'Unifiedtransform') }}</title>
 
     <link rel="shortcut icon" href="{{asset('favicon_io/favicon.ico')}}">
     <link rel="shortcut icon" sizes="16x16" href="{{asset('favicon_io/favicon-16x16.png')}}">
@@ -27,23 +27,6 @@
    
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <style>
-        .language-switcher {
-            display: flex;
-            align-items: center;
-            margin-left: 15px;
-        }
-        .language-switcher a {
-            padding: 5px 10px;
-            text-decoration: none;
-            color: #666;
-            margin: 0 5px;
-        }
-        .language-switcher a.active {
-            color: #000;
-            font-weight: bold;
-        }
-    </style>
 </head>
 <body>
     <div id="app">
@@ -75,12 +58,6 @@
                             @else
                                 <a class="nav-link text-danger disabled" href="#" tabindex="-1" aria-disabled="true"><i class="bi bi-exclamation-diamond-fill me-2"></i> Create an Academic Session.</a>
                             @endif
-                        </li>
-                        <li class="nav-item">
-                            <div class="language-switcher">
-                                <a href="{{ route('language.switch', 'km') }}" class="{{ app()->getLocale() == 'km' ? 'active' : '' }}">ខ្មែរ</a>
-                                <a href="{{ route('language.switch', 'en') }}" class="{{ app()->getLocale() == 'en' ? 'active' : '' }}">English</a>
-                            </div>
                         </li>
                     </ul>
                     @endauth
@@ -126,7 +103,7 @@
     </div>
 
     <div id="watermark">
-        <p>Edu-School-Management</p>
+        <p>Unifiedtransform</p>
     </div>
 </body>
 </html>
