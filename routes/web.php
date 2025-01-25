@@ -40,17 +40,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('language/{locale}', function ($locale) {
-    if (in_array($locale, config('app.available_locales'))) {
-        session(['locale' => $locale]);
-    }
-    return redirect()->back();
-})->name('language.switch');
-
-Route::get('/calendar', function () {
-    return view('calendar');
-})->middleware(['auth'])->name('calendar');
-
 Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
