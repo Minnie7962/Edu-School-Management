@@ -34,7 +34,7 @@ class SectionController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function index()
     {
@@ -44,7 +44,7 @@ class SectionController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function create()
     {
@@ -55,7 +55,7 @@ class SectionController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  SectionStoreRequest $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(SectionStoreRequest $request)
     {
@@ -103,14 +103,14 @@ class SectionController extends Controller
             'section_id'                => $section_id,
             'section'                   => $section,
         ];
-        return view('sections.edit', $data);
+        return response()->view('sections.edit', $data);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request)
     {

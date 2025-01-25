@@ -69,9 +69,9 @@ class User extends Authenticatable
     /**
      * Get the academic_info.
      */
-    public function academic_info()
+    public function academicInfo()
     {
-        return $this->hasOne(StudentAcademicInfo::class, 'student_id', 'id');
+        return $this->hasOne(StudentAcademicInfo::class, 'student_id');
     }
 
     /**

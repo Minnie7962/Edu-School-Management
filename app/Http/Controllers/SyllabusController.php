@@ -40,7 +40,7 @@ class SyllabusController extends Controller
             'syllabi'   => $syllabi
         ];
 
-        return view('syllabi.show', $data);
+        return response()->view('syllabi.show', $data);
     }
 
     /**
@@ -58,7 +58,7 @@ class SyllabusController extends Controller
             'current_school_session_id' => $current_school_session_id,
             'school_classes'    => $school_classes,
         ];
-        return view('syllabi.create', $data);
+        return response()->view('syllabi.create', $data);
     }
 
     /**
@@ -79,7 +79,7 @@ class SyllabusController extends Controller
             $syllabusRepository = new SyllabusRepository();
             $syllabusRepository->store($validatedRequest);
 
-            return back()->with('status', 'Creating syllabus was successful!');
+            return response()->json(['status' => 'Creating syllabus was successful!']);
         } catch (\Exception $e) {
             return back()->withError($e->getMessage());
         }
@@ -91,42 +91,5 @@ class SyllabusController extends Controller
      * @param  \App\Models\Syllabus  $syllabus
      * @return \Illuminate\Http\Response
      */
-    public function show(Syllabus $syllabus)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Syllabus  $syllabus
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Syllabus $syllabus)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Syllabus  $syllabus
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Syllabus $syllabus)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Syllabus  $syllabus
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Syllabus $syllabus)
-    {
-        //
-    }
+    
 }

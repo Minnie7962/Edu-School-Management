@@ -24,6 +24,7 @@ use App\Http\Controllers\SchoolSessionController;
 use App\Http\Controllers\AcademicSettingController;
 use App\Http\Controllers\AssignedTeacherController;
 use App\Http\Controllers\Auth\UpdatePasswordController;
+use App\Http\Controllers\StudentAcademicInfoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -99,10 +100,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/teachers/view/profile/{id}', [UserController::class, 'showTeacherProfile'])->name('teacher.profile.show');
 
     //Students
-    Route::get('/students/add', [UserController::class, 'createStudent'])->name('student.create.show');
-    Route::get('/students/edit/{id}', [UserController::class, 'editStudent'])->name('student.edit.show');
-    Route::get('/students/view/list', [UserController::class, 'getStudentList'])->name('student.list.show');
-    Route::get('/students/view/profile/{id}', [UserController::class, 'showStudentProfile'])->name('student.profile.show');
+    Route::get('/students/add', [StudentAcademicInfoController::class, 'createStudent'])->name('student.create.show');
+    Route::get('/students/edit/{id}', [StudentAcademicInfoController::class, 'editStudent'])->name('student.edit.show');
+    Route::get('/students/view/list', [StudentAcademicInfoController::class, 'getStudentList'])->name('student.list.show');
+    Route::get('/students/view/profile/{id}', [StudentAcademicInfoController::class, 'showStudentProfile'])->name('student.profile.show');
     Route::get('/students/view/attendance/{id}', [AttendanceController::class, 'showStudentAttendance'])->name('student.attendance.show');
 
     // Marks

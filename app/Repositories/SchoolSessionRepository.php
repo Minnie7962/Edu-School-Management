@@ -6,6 +6,10 @@ use App\Models\SchoolSession;
 use App\Interfaces\SchoolSessionInterface;
 
 class SchoolSessionRepository implements SchoolSessionInterface {
+    public function getCurrentSession() {
+        // Implement the logic for getting the current session
+        return SchoolSession::where('current', 1)->first();
+    }
     public function getLatestSession() {
         $school_session = SchoolSession::latest()->first();
         if($school_session){

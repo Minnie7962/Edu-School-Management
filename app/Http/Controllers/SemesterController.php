@@ -19,7 +19,7 @@ class SemesterController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  SemesterStoreRequest  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(SemesterStoreRequest $request)
     {
