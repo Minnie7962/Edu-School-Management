@@ -60,7 +60,7 @@
                                         @if (Auth::user()->role == "admin")
                                         <tr>
                                             <td>{{$exam->exam_name}}</td>
-                                            <td>{{$exam->course->course_name}}</td>
+                                            <td>{{ optional($exam->course)->course_name ?? 'N/A' }}</td>
                                             <td>{{$exam->created_at}}</td>
                                             <td>{{$exam->start_date}}</td>
                                             <td>{{$exam->end_date}}</td>

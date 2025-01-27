@@ -72,8 +72,8 @@ Route::middleware(['auth'])->group(function () {
         Route::post('teacher/assign', [AssignedTeacherController::class, 'store'])->name('teacher.assign');
 
         // Student
-        Route::post('student/create', [UserController::class, 'storeStudent'])->name('student.create');
-        Route::post('student/update', [UserController::class, 'updateStudent'])->name('student.update');
+        Route::post('student/create', [StudentAcademicInfoController::class, 'storeStudent'])->name('student.create');
+        Route::post('student/update', [StudentAcademicInfoController::class, 'updateStudent'])->name('student.update');
     });
  
 
@@ -119,11 +119,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Exams
     Route::get('/exams/view', [ExamController::class, 'index'])->name('exam.list.show');
-    // Route::get('/exams/view/history', function () {
-    //     return view('exams.history');
-    // });
     Route::post('/exams/create', [ExamController::class, 'store'])->name('exam.create');
-    // Route::post('/exams/delete', [ExamController::class, 'delete'])->name('exam.delete');
     Route::get('/exams/create', [ExamController::class, 'create'])->name('exam.create.show');
     Route::get('/exams/add-rule', [ExamRuleController::class, 'create'])->name('exam.rule.create');
     Route::post('/exams/add-rule', [ExamRuleController::class, 'store'])->name('exam.rule.store');
@@ -144,7 +140,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/promotions/promote', [PromotionController::class, 'store'])->name('promotions.store');
 
     // Academic settings
-    Route::get('/academics/settings', [AcademicSettingController::class, 'index']);
+    Route::get('/academics/settings', [AcademicSettingController::class, 'index'])->name('academics.settings');
 
     // Calendar events
     Route::get('calendar-event', [EventController::class, 'index'])->name('events.show');

@@ -56,7 +56,14 @@ class AcademicSettingController extends Controller
 
         $latest_school_session = $this->schoolSessionRepository->getLatestSession();
 
+        // Fetch academic setting or provide default values if null
         $academic_setting = $this->academicSettingRepository->getAcademicSetting();
+        if (!$academic_setting) {
+            $academic_setting = (object) [
+                'attendance_type' => 'section', // Default value
+                'marks_submission_status' => 'off', // Default value
+            ];
+        }
 
         $school_sessions = $this->schoolSessionRepository->getAll();
 
@@ -82,7 +89,7 @@ class AcademicSettingController extends Controller
             'semesters'                 => $semesters,
         ];
 
-        return response()->view('academics.settings', $data);
+        return view('academics.settings', $data);
     }
 
     /**
@@ -102,7 +109,14 @@ class AcademicSettingController extends Controller
         }
     }
 
-    public function updateFinalMarksSubmissionStatus(Request $request) {
+    /**
+     * Update the final marks submission status.
+     *
+     * @param  Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function updateFinalMarksSubmissionStatus(Request $request)
+    {
         try {
             $this->academicSettingRepository->updateFinalMarksSubmissionStatus($request);
 

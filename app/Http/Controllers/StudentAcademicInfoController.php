@@ -25,7 +25,7 @@ class StudentAcademicInfoController extends Controller
     SchoolClassInterface $schoolClassRepository,
     SectionInterface $schoolSectionRepository)
     {
-        $this->middleware(['can:view users']);
+        $this->middleware('auth');
 
         $this->userRepository = $userRepository;
         $this->schoolSessionRepository = $schoolSessionRepository;

@@ -9,7 +9,7 @@
             <div class="row pt-2">
                 <div class="col ps-4">
                     <h1 class="display-6 mb-3">
-                        <i class="bi bi-tools"></i> Academic Settings
+                        <i class="bi bi-tools"></i> Settings
                     </h1>
 
                     @include('session-messages')
@@ -87,13 +87,13 @@
                                     <form action="{{route('school.attendance.type.update')}}" method="POST">
                                         @csrf
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="attendance_type" id="attendance_type_section" {{($academic_setting->attendance_type == 'section')?'checked="checked"':null}} value="section">
+                                            <input class="form-check-input" type="radio" name="attendance_type" id="attendance_type_section" {{ ($academic_setting->attendance_type ?? 'section') == 'section' ? 'checked="checked"' : '' }} value="section">
                                             <label class="form-check-label" for="attendance_type_section">
                                                 Attendance by Section
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="attendance_type" id="attendance_type_course" {{($academic_setting->attendance_type == 'course')?'checked="checked"':null}} value="course">
+                                            <input class="form-check-input" type="radio" name="attendance_type" id="attendance_type_course" {{ ($academic_setting->attendance_type ?? 'section') == 'course' ? 'checked="checked"' : '' }} value="course">
                                             <label class="form-check-label" for="attendance_type_course">
                                                 Attendance by Course
                                             </label>
@@ -247,8 +247,8 @@
                                             <small><i class="bi bi-exclamation-diamond-fill me-2"></i> Disallow at the start of a "Semester".</small>
                                         </p>
                                         <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" name="marks_submission_status" id="marks_submission_status_check" {{($academic_setting->marks_submission_status == 'on')?'checked="checked"':null}}>
-                                            <label class="form-check-label" for="marks_submission_status_check">{{($academic_setting->marks_submission_status == 'on')?'Allowed':'Disallowed'}}</label>
+                                            <input class="form-check-input" type="checkbox" name="marks_submission_status" id="marks_submission_status_check" {{ ($academic_setting->marks_submission_status ?? 'off') == 'on' ? 'checked="checked"' : '' }}>
+                                            <label class="form-check-label" for="marks_submission_status_check">{{ ($academic_setting->marks_submission_status ?? 'off') == 'on' ? 'Allowed' : 'Disallowed' }}</label>
                                         </div>
                                         <button type="submit" class="mt-3 btn btn-sm btn-outline-primary"><i class="bi bi-check2"></i> Save</button>
                                     </form>

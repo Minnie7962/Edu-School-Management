@@ -7,35 +7,110 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Unifiedtransform') }}</title>
+    <title>សាលាបឋមសិក្សាតាម៉ា</title>
 
-    <link rel="shortcut icon" href="{{asset('favicon_io/favicon.ico')}}">
-    <link rel="shortcut icon" sizes="16x16" href="{{asset('favicon_io/favicon-16x16.png')}}">
-    <link rel="shortcut icon" sizes="32x32" href="{{asset('favicon_io/favicon-32x32.png')}}">
-    <link rel="apple-touch-icon" href="{{asset('favicon_io/apple-touch-icon.png')}}">
-    <link rel="icon" href="{{asset('favicon_io/android-chrome-192x192.png')}}" sizes="192x192">
-    <link rel="icon" href="{{asset('favicon_io/android-chrome-512x512.png')}}" sizes="512x512">
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
-    <!-- <script src="{{ asset('js/app.js') }}" defer></script> -->
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{{ asset('favicon_io/favicon.ico') }}">
+    <link rel="shortcut icon" sizes="16x16" href="{{ asset('favicon_io/favicon-16x16.png') }}">
+    <link rel="shortcut icon" sizes="32x32" href="{{ asset('favicon_io/favicon-32x32.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('favicon_io/apple-touch-icon.png') }}">
+    <link rel="icon" href="{{ asset('favicon_io/android-chrome-192x192.png') }}" sizes="192x192">
+    <link rel="icon" href="{{ asset('favicon_io/android-chrome-512x512.png') }}" sizes="512x512">
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-   
+    <!-- Bootstrap CSS -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Custom Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <!-- Custom Styles -->
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary-color: #f3f4f6;
+            --accent-color: #3b82f6;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --white: #ffffff;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--white);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background-color: var(--white);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 600;
+            color: var(--text-dark) !important;
+        }
+
+        .navbar-brand:hover {
+            color: var(--primary-color) !important;
+        }
+
+        .nav-link {
+            color: var(--text-dark) !important;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+
+        .dropdown-menu {
+            border: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .dropdown-item {
+            color: var(--text-dark) !important;
+        }
+
+        .dropdown-item:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .badge {
+            font-weight: 500;
+        }
+
+        #watermark {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            opacity: 0.2;
+            font-size: 12px;
+            color: var(--text-dark);
+        }
+    </style>
 </head>
 <body>
     <div id="app">
-        <nav class="navbar sticky-top navbar-expand-md navbar-light bg-white border-btm-e6">
+        <!-- Navigation Bar -->
+        <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <i class="bi bi-house"></i> {{ config('app.name', 'Laravel') }}
+                    <i class="fas fa-school"></i> {{ config('app.name', 'Unifiedtransform') }}
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
@@ -44,26 +119,29 @@
                     @auth
                         @php
                             $latest_school_session = \App\Models\SchoolSession::latest()->first();
-                            $current_school_session_name = null;
-                            if($latest_school_session){
-                                $current_school_session_name = $latest_school_session->session_name;
-                            }
+                            $current_school_session_name = $latest_school_session ? $latest_school_session->session_name : null;
                         @endphp
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            @if (session()->has('browse_session_name') && session('browse_session_name') !== $current_school_session_name)
-                                <a class="nav-link text-danger disabled" href="#" tabindex="-1" aria-disabled="true"><i class="bi bi-exclamation-diamond-fill me-2"></i> Browsing as Academic Session {{session('browse_session_name')}}</a>
-                            @elseif(\App\Models\SchoolSession::latest()->count() > 0)
-                                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Current Academic Session {{$current_school_session_name}}</a>
-                            @else
-                                <a class="nav-link text-danger disabled" href="#" tabindex="-1" aria-disabled="true"><i class="bi bi-exclamation-diamond-fill me-2"></i> Create an Academic Session.</a>
-                            @endif
-                        </li>
-                    </ul>
+                        <ul class="navbar-nav me-auto">
+                            <li class="nav-item">
+                                @if (session()->has('browse_session_name') && session('browse_session_name') !== $current_school_session_name)
+                                    <a class="nav-link text-danger disabled" href="#" tabindex="-1" aria-disabled="true">
+                                        <i class="fas fa-exclamation-circle me-2"></i> Browsing as Academic Session {{ session('browse_session_name') }}
+                                    </a>
+                                @elseif($latest_school_session)
+                                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">
+                                        Current Academic Session {{ $current_school_session_name }}
+                                    </a>
+                                @else
+                                    <a class="nav-link text-danger disabled" href="#" tabindex="-1" aria-disabled="true">
+                                        <i class="fas fa-exclamation-circle me-2"></i> Create an Academic Session.
+                                    </a>
+                                @endif
+                            </li>
+                        </ul>
                     @endauth
+
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
@@ -76,17 +154,13 @@
                                     <span class="badge bg-light text-dark">{{ ucfirst(Auth::user()->role) }}</span>
                                     {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
                                 </a>
-
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{route('password.edit')}}">
-                                        <i class="bi bi-key me-2"></i> Change Password
+                                    <a class="dropdown-item" href="{{ route('password.edit') }}">
+                                        <i class="fas fa-key me-2"></i> Change Password
                                     </a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        <i class="bi bi-door-open me-2"></i> {{ __('Logout') }}
+                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        <i class="fas fa-sign-out-alt me-2"></i> {{ __('Logout') }}
                                     </a>
-
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
@@ -97,13 +171,19 @@
                 </div>
             </div>
         </nav>
-        <main>
+
+        <!-- Main Content -->
+        <main class="py-4">
             @yield('content')
         </main>
     </div>
 
+    <!-- Watermark -->
     <div id="watermark">
         <p>Unifiedtransform</p>
     </div>
+
+    <!-- Bootstrap JS -->
+    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 </body>
 </html>

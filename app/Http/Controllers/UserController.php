@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\Traits\SchoolSession;
 use App\Interfaces\UserInterface;
 use App\Interfaces\SectionInterface;
@@ -83,5 +85,26 @@ class UserController extends Controller
         ];
 
         return view('teachers.list', $data);
+    }
+
+    public function register(Request $request)
+    {
+        // Validate the request
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        // Create the user
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role' => 'admin', // Assign the admin role
+        ]);
+
+        // Redirect or return a response
+        return redirect()->route('home')->with('status', 'User registered successfully!');
     }
 }

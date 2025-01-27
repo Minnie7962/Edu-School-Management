@@ -46,11 +46,12 @@ class ExamController extends Controller
 
         $examRepository = new ExamRepository();
 
-        $exams = $examRepository->getAll($current_school_session_id, $semester_id, $class_id);
+        // Eager load the course relationship
+        $exams = $examRepository->getAll($current_school_session_id, $semester_id, $class_id)->load('course');
 
         $assignedTeacherRepository = new AssignedTeacherRepository();
 
-        $teacher_id = (auth()->user()->role == "teacher")?auth()->user()->id : 0;
+        $teacher_id = (auth()->user()->role == "teacher") ? auth()->user()->id : 0;
 
         $teacherCourses = $assignedTeacherRepository->getTeacherCourses($current_school_session_id, $teacher_id, $semester_id);
 
