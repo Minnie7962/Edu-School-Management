@@ -13,7 +13,7 @@ class RoutineStoreRequest extends FormRequest
      */
     public function authorize()
     {
-        return auth()->user()->can('create routines');
+        return \Illuminate\Support\Facades\Gate::allows('create routines');
     }
 
     /**

@@ -13,7 +13,7 @@ class SchoolSessionBrowseRequest extends FormRequest
      */
     public function authorize()
     {
-        return auth()->user()->can('update browse by session');
+        return \Illuminate\Support\Facades\Gate::allows('update browse by session');
     }
 
     /**

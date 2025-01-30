@@ -13,7 +13,7 @@ class NoticeStoreRequest extends FormRequest
      */
     public function authorize()
     {
-        return auth()->user()->can('create notices');
+        return \Illuminate\Support\Facades\Gate::allows('create notices');
     }
 
     /**

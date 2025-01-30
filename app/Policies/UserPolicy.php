@@ -24,4 +24,9 @@ class UserPolicy
         // Allow admins and teachers to view users
         return $user->role === 'admin' || $user->role === 'teacher';
     }
+
+    public function create(User $user)
+    {
+        return $user->role === 'admin';
+    }
 }

@@ -13,7 +13,7 @@ class GradeRuleStoreRequest extends FormRequest
      */
     public function authorize()
     {
-        return auth()->user()->can('create grading systems rule');
+        return \Illuminate\Support\Facades\Gate::allows('create grading systems rule');
     }
 
     /**

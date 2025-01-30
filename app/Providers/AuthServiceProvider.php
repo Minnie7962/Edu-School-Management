@@ -17,7 +17,6 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
         User::class => UserPolicy::class,
         AcademicSetting::class => AcademicSettingPolicy::class,
     ];
@@ -31,15 +30,53 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        // Define the "view users" gate
-        Gate::define('view users', function ($user) {
-            // Allow admins and teachers to view users
-            return $user->role === 'admin' || $user->role === 'teacher';
+        // Admin capabilities
+        Gate::define('manage-system', function ($user) {
+            return $user->role === 'admin';
         });
 
-        Gate::define('view academic settings', function ($user) {
-            // Allow only admins to view academic settings
+        Gate::define('view-users', function ($user) {
+            return in_array($user->role, ['admin', 'teacher']);
+        });
+
+        // Academic settings
+        Gate::define('view-academic-settings', function ($user) {
             return $user->role === 'admin';
+        });
+
+        Gate::define('manage-academic-settings', function ($user) {
+            return $user->role === 'admin';
+        });
+
+        // Teacher capabilities
+        Gate::define('manage-courses', function ($user) {
+            return in_array($user->role, ['admin', 'teacher']);
+        });
+
+        Gate::define('manage-grades', function ($user) {
+            return in_array($user->role, ['admin', 'teacher']);
+        });
+
+        Gate::define('manage-attendance', function ($user) {
+            return in_array($user->role, ['admin', 'teacher']);
+        });
+
+        // Student capabilities
+        Gate::define('view-grades', function ($user) {
+            return $user->role === 'student';
+        });
+
+        Gate::define('view-attendance', function ($user) {
+            return $user->role === 'student';
+        });
+
+        // Shared capabilities
+        Gate::define('view-announcements', function ($user) {
+            return in_array($user->role, ['admin', 'teacher', 'student']);
+        });
+
+        Gate::define('view-schedule', function ($user) {
+            return in_array($user->role, ['admin', 'teacher', 'student']);
         });
     }
 }

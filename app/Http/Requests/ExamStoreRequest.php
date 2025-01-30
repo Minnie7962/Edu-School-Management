@@ -13,7 +13,7 @@ class ExamStoreRequest extends FormRequest
      */
     public function authorize()
     {
-        return auth()->user()->can('create exams');
+        return \Illuminate\Support\Facades\Gate::allows('create exams');
     }
 
     /**

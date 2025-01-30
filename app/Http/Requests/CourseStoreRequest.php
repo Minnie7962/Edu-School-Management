@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Spatie\Permission\Traits\HasRoles;
 
 class CourseStoreRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class CourseStoreRequest extends FormRequest
      */
     public function authorize()
     {
-        return auth()->user()->can('create courses');
+        return \Illuminate\Support\Facades\Gate::allows('create courses');
     }
 
     /**

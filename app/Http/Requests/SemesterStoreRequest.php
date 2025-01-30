@@ -13,7 +13,7 @@ class SemesterStoreRequest extends FormRequest
      */
     public function authorize()
     {
-        return auth()->user()->can('create semesters');
+        return \Illuminate\Support\Facades\Gate::allows('create semesters');
     }
 
     /**

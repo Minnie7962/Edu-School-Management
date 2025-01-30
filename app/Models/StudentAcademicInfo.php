@@ -16,6 +16,7 @@ class StudentAcademicInfo extends Model
      * @var array
      */
     protected $fillable = [
+        'name',
         'student_id',
         'board_reg_no',
     ];

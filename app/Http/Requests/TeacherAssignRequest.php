@@ -13,7 +13,7 @@ class TeacherAssignRequest extends FormRequest
      */
     public function authorize()
     {
-        return auth()->user()->can('assign teachers');
+        return \Illuminate\Support\Facades\Gate::allows('assign teachers');
     }
 
     /**

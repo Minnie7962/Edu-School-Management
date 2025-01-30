@@ -13,7 +13,7 @@ class SchoolSessionStoreRequest extends FormRequest
      */
     public function authorize()
     {
-        return auth()->user()->can('create school sessions');
+        return \Illuminate\Support\Facades\Gate::allows('create school sessions');
     }
 
     /**

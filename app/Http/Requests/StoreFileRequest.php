@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
 class StoreFileRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class StoreFileRequest extends FormRequest
      */
     public function authorize()
     {
-        return (auth()->user()->can('create assignments') || auth()->user()->can('create syllabi'));
+        return (Gate::allows('create assignments') || Gate::allows('create syllabi'));
     }
 
     /**

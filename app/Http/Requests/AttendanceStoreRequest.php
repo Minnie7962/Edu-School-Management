@@ -13,7 +13,7 @@ class AttendanceStoreRequest extends FormRequest
      */
     public function authorize()
     {
-        return auth()->user()->can('take attendances');
+        return \Illuminate\Support\Facades\Gate::allows('take attendances');
     }
 
     /**
