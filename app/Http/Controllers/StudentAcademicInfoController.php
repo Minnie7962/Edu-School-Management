@@ -11,6 +11,7 @@ use App\Repositories\PromotionRepository;
 use App\Http\Requests\StudentStoreRequest;
 use App\Interfaces\SchoolSessionInterface;
 use App\Repositories\StudentParentInfoRepository;
+use App\Models\StudentAcademicInfo;
 
 class StudentAcademicInfoController extends Controller
 {
@@ -154,5 +155,11 @@ class StudentAcademicInfoController extends Controller
         } catch (\Exception $e) {
             return back()->withError($e->getMessage());
         }
+    }
+
+    public function list()
+    {
+        $students = StudentAcademicInfo::all();
+        return view('students.list', compact('students'));
     }
 }

@@ -2,4 +2,6 @@
 
 namespace App\Repositories;
 
-class EventRepository {}
+class EventRepository {
+    
+}

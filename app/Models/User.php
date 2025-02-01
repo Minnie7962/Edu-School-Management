@@ -69,10 +69,7 @@ class User extends Authenticatable
     /**
      * Get the academic_info.
      */
-    public function academicInfo()
-    {
-        return $this->hasOne(StudentAcademicInfo::class, 'student_id');
-    }
+    
 
     /**
      * Get the marks.
@@ -80,5 +77,15 @@ class User extends Authenticatable
     public function marks()
     {
         return $this->hasMany(Mark::class, 'student_id', 'id');
+    }
+
+    public function student()
+    {
+        return $this->hasOne(StudentAcademicInfo::class);
+    }
+
+    public function assignedTeachers()
+    {
+        return $this->hasMany(AssignedTeacher::class, 'teacher_id');
     }
 }

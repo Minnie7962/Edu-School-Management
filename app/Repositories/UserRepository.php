@@ -171,45 +171,7 @@ class UserRepository implements UserInterface {
         }
     }
 
-    public function getAllStudents($session_id, $class_id, $section_id) {
-        if($class_id == 0 || $section_id == 0) {
-            $schoolClass = SchoolClass::where('session_id', $session_id)
-                                    ->first();
-            $section = Section::where('session_id', $session_id)
-                                    ->first();
-            if($schoolClass == null || $section == null){
-                throw new \Exception('There is no class and section');
-            } else {
-                $class_id = $schoolClass->id;
-                $section_id = $section->id;
-            }
-            
-        }
-        try {
-            $promotionRepository = new PromotionRepository();
-            return $promotionRepository->getAll($session_id, $class_id, $section_id);
-        } catch (\Exception $e) {
-            throw new \Exception('Failed to get all Students. '.$e->getMessage());
-        }
-    }
-
-    public function getAllStudentsBySession($session_id) {
-        $promotionRepository = new PromotionRepository();
-        return $promotionRepository->getAllStudentsBySession($session_id);
-    }
-
-    public function getAllStudentsBySessionCount($session_id) {
-        $promotionRepository = new PromotionRepository();
-        return $promotionRepository->getAllStudentsBySessionCount($session_id);
-    }
-
-    public function findStudent($id) {
-        try {
-            return User::with('parent_info', 'academic_info')->where('id', $id)->first();
-        } catch (\Exception $e) {
-            throw new \Exception('Failed to get Student. '.$e->getMessage());
-        }
-    }
+    
 
     public function findTeacher($id) {
         try {
@@ -224,6 +186,49 @@ class UserRepository implements UserInterface {
             return User::where('role', 'teacher')->get();
         } catch (\Exception $e) {
             throw new \Exception('Failed to get all Teachers. '.$e->getMessage());
+        }
+    }
+
+    public function findStudent($id) {
+        try {
+            return User::where('id', $id)->where('role', 'student')->first();
+        } catch (\Exception $e) {
+            throw new \Exception('Failed to get Student. '.$e->getMessage());
+        }
+    }
+
+    public function getAllStudents($current_session, $class_id, $section_id) {
+        try {
+            return User::where('role', 'student')
+                        ->whereHas('studentAcademicInfo', function($query) use ($current_session, $class_id, $section_id) {
+                            $query->where('session_id', $current_session)
+                                  ->where('class_id', $class_id)
+                                  ->where('section_id', $section_id);
+                        })->get();
+        } catch (\Exception $e) {
+            throw new \Exception('Failed to get all Students. '.$e->getMessage());
+        }
+    }
+
+    public function getAllStudentsBySession($session_id) {
+        try {
+            return User::where('role', 'student')
+                        ->whereHas('studentAcademicInfo', function($query) use ($session_id) {
+                            $query->where('session_id', $session_id);
+                        })->get();
+        } catch (\Exception $e) {
+            throw new \Exception('Failed to get all Students by session. '.$e->getMessage());
+        }
+    }
+
+    public function getAllStudentsBySessionCount($session_id) {
+        try {
+            return User::where('role', 'student')
+                        ->whereHas('studentAcademicInfo', function($query) use ($session_id) {
+                            $query->where('session_id', $session_id);
+                        })->count();
+        } catch (\Exception $e) {
+            throw new \Exception('Failed to get all Students count by session. '.$e->getMessage());
         }
     }
 
