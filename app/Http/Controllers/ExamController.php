@@ -46,12 +46,11 @@ class ExamController extends Controller
 
         $examRepository = new ExamRepository();
 
-        // Eager load the course relationship
-        $exams = $examRepository->getAll($current_school_session_id, $semester_id, $class_id)->load('course');
+        $exams = $examRepository->getAll($current_school_session_id, $semester_id, $class_id);
 
         $assignedTeacherRepository = new AssignedTeacherRepository();
 
-        $teacher_id = (auth()->user()->role == "teacher") ? auth()->user()->id : 0;
+        $teacher_id = (auth()->user()->role == "teacher")?auth()->user()->id : 0;
 
         $teacherCourses = $assignedTeacherRepository->getTeacherCourses($current_school_session_id, $teacher_id, $semester_id);
 
@@ -63,7 +62,7 @@ class ExamController extends Controller
             'teacher_courses'           => $teacherCourses,
         ];
 
-        return view('exams.index', $data);
+        return response()->view('exams.index', $data);
     }
 
     /**
@@ -98,7 +97,7 @@ class ExamController extends Controller
             'classes'                   => $school_classes,
         ];
 
-        return view('exams.create', $data);
+        return response()->view('exams.create', $data);
     }
 
     /**
@@ -117,40 +116,6 @@ class ExamController extends Controller
         } catch (\Exception $e) {
             return back()->withError($e->getMessage());
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Exam  $exam
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Exam $exam)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Exam  $exam
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Exam $exam)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Exam  $exam
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Exam $exam)
-    {
-        //
     }
 
     /**

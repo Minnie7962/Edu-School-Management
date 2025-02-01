@@ -45,7 +45,7 @@ class GradingSystemController extends Controller
             'current_school_session_id' => $current_school_session_id,
         ];
 
-        return view('exams.grade.view', $data);
+        return response()->view('exams.grade.view', $data);
     }
 
     /**
@@ -65,7 +65,7 @@ class GradingSystemController extends Controller
             'semesters'                 => $semesters,
         ];
 
-        return view('exams.grade.create', $data);
+        return response()->view('exams.grade.create', $data);
     }
 
     /**
@@ -84,50 +84,5 @@ class GradingSystemController extends Controller
         } catch (\Exception $e) {
             return back()->withError($e->getMessage());
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\GradingSystem  $gradingSystem
-     * @return \Illuminate\Http\Response
-     */
-    public function show(GradingSystem $gradingSystem)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\GradingSystem  $gradingSystem
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(GradingSystem $gradingSystem)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\GradingSystem  $gradingSystem
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, GradingSystem $gradingSystem)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\GradingSystem  $gradingSystem
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(GradingSystem $gradingSystem)
-    {
-        //
     }
 }

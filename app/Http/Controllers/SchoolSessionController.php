@@ -32,7 +32,7 @@ class SchoolSessionController extends Controller
         try {
             $this->schoolSessionRepository->create($request->validated());
 
-            return response()->json(['status' => 'Session creation was successful!']);
+            return back()->with('status', 'Session creation was successful!');
         } catch (\Exception $e) {
             return back()->withError($e->getMessage());
         }
@@ -51,7 +51,7 @@ class SchoolSessionController extends Controller
         try {
             $this->schoolSessionRepository->browse($request->validated());
 
-            return response()->json(['status' => 'Browsing session set was successful!']);
+            return back()->with('status', 'Browsing session set was successful!');
         } catch (\Exception $e) {
             return back()->withError($e->getMessage());
         }

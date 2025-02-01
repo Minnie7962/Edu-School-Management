@@ -13,7 +13,7 @@ class ExamRuleStoreRequest extends FormRequest
      */
     public function authorize()
     {
-        return \Illuminate\Support\Facades\Gate::allows('create exams rule');
+        return auth()->user()->can('create exams rule');
     }
 
     /**

@@ -40,7 +40,7 @@ class AssignedTeacherController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  Request $request
+     * @param  CourseStoreRequest $request
      * @return \Illuminate\Http\Response
      */
     public function getTeacherCourses(Request $request)

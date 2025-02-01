@@ -101,11 +101,6 @@
                     </a>
                 </li>
                 <li class="nav-item border-bottom">
-                    @php
-                        $class_info = session()->has('browse_session_id')
-                            ? \App\Models\Promotion::where('session_id', session('browse_session_id'))->where('student_id', Auth::user()->id)->first()
-                            : ($latest_session ? \App\Models\Promotion::where('session_id', $latest_session->id)->where('student_id', Auth::user()->id)->first() : []);
-                    @endphp
                     <a class="nav-link" href="{{ route('section.routine.show', ['class_id' => $class_info->class_id, 'section_id' => $class_info->section_id]) }}" aria-label="Routine">
                         <i class="fas fa-calendar-alt me-2"></i>
                         <span class="d-none d-xl-inline">{{ __('កាលវិភាគ') }}</span>

@@ -13,7 +13,7 @@ class SchoolClassStoreRequest extends FormRequest
      */
     public function authorize()
     {
-        return \Illuminate\Support\Facades\Gate::allows('create classes');
+        return auth()->user()->can('create classes');
     }
 
     /**

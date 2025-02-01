@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\Syllabus;
 use Illuminate\Http\Request;
 use App\Traits\SchoolSession;
 use App\Http\Requests\StoreFileRequest;
@@ -79,17 +78,16 @@ class SyllabusController extends Controller
             $syllabusRepository = new SyllabusRepository();
             $syllabusRepository->store($validatedRequest);
 
-            return response()->json(['status' => 'Creating syllabus was successful!']);
+            return back()->with('status', 'Creating syllabus was successful!');
         } catch (\Exception $e) {
             return back()->withError($e->getMessage());
         }
     }
 
     /**
-     * Display the specified resource.
+     * Remove the specified resource from storage.
      *
      * @param  \App\Models\Syllabus  $syllabus
      * @return \Illuminate\Http\Response
      */
-    
 }

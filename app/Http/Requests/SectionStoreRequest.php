@@ -13,7 +13,7 @@ class SectionStoreRequest extends FormRequest
      */
     public function authorize()
     {
-        return \Illuminate\Support\Facades\Gate::allows('create sections');
+        return auth()->user()->can('create sections');
     }
 
     /**

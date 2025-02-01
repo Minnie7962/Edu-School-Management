@@ -13,7 +13,7 @@ class AttendanceTypeUpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        return \Illuminate\Support\Facades\Gate::allows('update attendances type');
+        return auth()->user()->can('update attendances type');
     }
 
     /**

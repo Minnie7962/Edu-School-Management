@@ -22,17 +22,6 @@ class RoutineController extends Controller
         $this->schoolSessionRepository = $schoolSessionRepository;
         $this->schoolClassRepository = $schoolClassRepository;
     }
-    
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -48,7 +37,7 @@ class RoutineController extends Controller
             'classes'                   => $school_classes,
         ];
 
-        return view('routines.create', $data);
+        return response()->view('routines.create', $data);
     }
 
     /**
@@ -88,40 +77,6 @@ class RoutineController extends Controller
             'routines' => $routines
         ];
 
-        return view('routines.show', $data);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Routine  $routine
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Routine $routine)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Routine  $routine
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Routine $routine)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Routine  $routine
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Routine $routine)
-    {
-        //
+        return response()->view('routines.show', $data);
     }
 }

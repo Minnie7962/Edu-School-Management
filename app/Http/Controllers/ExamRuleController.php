@@ -36,7 +36,7 @@ class ExamRuleController extends Controller
         $data = [
             'exam_rules' => $exam_rules
         ];
-        return view('exams.view-rule', $data);
+        return response()->view('exams.view-rule', $data);
     }
 
     /**
@@ -55,7 +55,7 @@ class ExamRuleController extends Controller
             'current_school_session_id' => $current_school_session_id,
         ];
 
-        return view('exams.add-rule', $data);
+        return response()->view('exams.add-rule', $data);
     }
 
     /**
@@ -84,7 +84,7 @@ class ExamRuleController extends Controller
      */
     public function show(ExamRule $examRule)
     {
-        return view('exams.view-rule');
+        return response()->view('exams.view-rule');
     }
 
     /**
@@ -101,7 +101,7 @@ class ExamRuleController extends Controller
             'exam_rule_id'  => $request->exam_rule_id,
             'exam_rule'     => $exam_rule,
         ];
-        return view('exams.edit-rule', $data);
+        return response()->view('exams.edit-rule', $data);
     }
 
     /**
@@ -120,16 +120,5 @@ class ExamRuleController extends Controller
         } catch (\Exception $e) {
             return back()->withError($e->getMessage());
         }
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\ExamRule  $examRule
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(ExamRule $examRule)
-    {
-        //
     }
 }

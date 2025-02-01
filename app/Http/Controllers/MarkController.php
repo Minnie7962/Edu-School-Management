@@ -71,21 +71,21 @@ class MarkController extends Controller
         $marks = $markRepository->getAllFinalMarks($current_school_session_id, $semester_id, $class_id, $section_id, $course_id);
 
         if(!$marks) {
-            return abort(404);
+            abort(404);
         }
 
         $gradingSystemRepository = new GradingSystemRepository();
         $gradingSystem = $gradingSystemRepository->getGradingSystem($current_school_session_id, $semester_id, $class_id);
 
         if(!$gradingSystem) {
-            return abort(404);
+            abort(404);
         }
 
         $gradeRulesRepository = new GradeRuleRepository();
         $gradingSystemRules = $gradeRulesRepository->getAll($current_school_session_id, $gradingSystem->id);
 
         if(!$gradingSystemRules) {
-            return abort(404);
+            abort(404);
         }
 
         foreach($marks as $mark_key => $mark) {
@@ -105,7 +105,7 @@ class MarkController extends Controller
             'grading_system_rules'      => $gradingSystemRules,
         ];
 
-        return view('marks.results', $data);
+        return response()->view('marks.results', $data);
     }
 
     /**
@@ -159,7 +159,7 @@ class MarkController extends Controller
                 'current_school_session_id' => $current_school_session_id,
             ];
 
-            return view('marks.create', $data);
+            return response()->view('marks.create', $data);
         } catch (\Exception $e) {
             return back()->withError($e->getMessage());
         }
@@ -196,7 +196,7 @@ class MarkController extends Controller
             'current_school_session_id' => $current_school_session_id,
         ];
 
-        return view('marks.submit-final-marks', $data);
+        return response()->view('marks.submit-final-marks', $data);
     }
 
     /**
@@ -288,21 +288,21 @@ class MarkController extends Controller
         $finalMarks = $markRepository->getAllFinalMarksByStudentId($session_id, $student_id, $semester_id, $class_id, $section_id, $course_id);
 
         if(!$finalMarks) {
-            return abort(404);
+            abort(404);
         }
 
         $gradingSystemRepository = new GradingSystemRepository();
         $gradingSystem = $gradingSystemRepository->getGradingSystem($session_id, $semester_id, $class_id);
 
         if(!$gradingSystem) {
-            return abort(404);
+            abort(404);
         }
 
         $gradeRulesRepository = new GradeRuleRepository();
         $gradingSystemRules = $gradeRulesRepository->getAll($session_id, $gradingSystem->id);
 
         if(!$gradingSystemRules) {
-            return abort(404);
+            abort(404);
         }
 
         foreach($finalMarks as $mark_key => $mark) {
@@ -320,40 +320,6 @@ class MarkController extends Controller
             'course_name' => $course_name,
         ];
 
-        return view('marks.student', $data);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Mark  $mark
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Mark $mark)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Mark  $mark
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Mark $mark)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Mark  $mark
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Mark $mark)
-    {
-        //
+        return response()->view('marks.student', $data);
     }
 }

@@ -28,13 +28,13 @@ class ExamRepository implements ExamInterface {
     {
         if($semester_id == 0 || $class_id == 0) {
             $semester_id = Semester::where('session_id', $session_id)
-            ->first();
+            ->first()->id;
             $class_id = SchoolClass::where('session_id', $session_id)
-                                    ->first();
+                                    ->first()->id;
         }
-        return Exam::where('session_id', $session_id)
-               ->where('semester_id', $semester_id)
-               ->where('class_id', $class_id)
-               ->get();
+        return Exam::with('course')->where('session_id', $session_id)
+                    ->where('semester_id', $semester_id)
+                    ->where('class_id', $class_id)
+                    ->get();
     }
 }

@@ -34,7 +34,7 @@ class GradeRuleController extends Controller
         $gradeRuleRepository = new GradeRuleRepository();
         $gradeRules = $gradeRuleRepository->getAll($current_school_session_id, $grading_system_id);
 
-        return view('exams.grade.view-rules', compact('gradeRules'));
+        return response()->view('exams.grade.view-rules', compact('gradeRules'));
     }
 
     /**
@@ -47,7 +47,7 @@ class GradeRuleController extends Controller
     {
         $grading_system_id = $request->query('grading_system_id');
         $current_school_session_id = $this->getSchoolCurrentSession();
-        return view('exams.grade.add-rule', compact('grading_system_id', 'current_school_session_id'));
+        return response()->view('exams.grade.add-rule', compact('grading_system_id', 'current_school_session_id'));
     }
 
     /**
@@ -66,40 +66,6 @@ class GradeRuleController extends Controller
         } catch (\Exception $e) {
             return back()->withError($e->getMessage());
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\GradeRule  $gradeRule
-     * @return \Illuminate\Http\Response
-     */
-    public function show(GradeRule $gradeRule)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\GradeRule  $gradeRule
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(GradeRule $gradeRule)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\GradeRule  $gradeRule
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, GradeRule $gradeRule)
-    {
-        //
     }
 
     /**

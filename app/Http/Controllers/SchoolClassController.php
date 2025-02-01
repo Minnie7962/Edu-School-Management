@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\SchoolClass;
 use Illuminate\Http\Request;
 use App\Interfaces\SchoolClassInterface;
 use App\Interfaces\SchoolSessionInterface;
@@ -40,17 +39,7 @@ class SchoolClassController extends Controller
 
         $data = $this->schoolClassRepository->getClassesAndSections($current_school_session_id);
 
-        return view('classes.index', $data);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return response()->view('classes.index', $data);
     }
 
     /**
@@ -69,18 +58,6 @@ class SchoolClassController extends Controller
             return back()->withError($e->getMessage());
         }
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\SchoolClass  $schoolClass
-     * @return \Illuminate\Http\Response
-     */
-    public function show(SchoolClass $schoolClass)
-    {
-        //
-    }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -98,7 +75,7 @@ class SchoolClassController extends Controller
             'class_id'                  => $class_id,
             'schoolClass'               => $schoolClass,
         ];
-        return view('classes.edit', $data);
+        return response()->view('classes.edit', $data);
     }
 
     /**
@@ -116,16 +93,5 @@ class SchoolClassController extends Controller
         } catch (\Exception $e) {
             return back()->withError($e->getMessage());
         }
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\SchoolClass  $schoolClass
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(SchoolClass $schoolClass)
-    {
-        //
     }
 }

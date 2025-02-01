@@ -19,15 +19,6 @@ class NoticeController extends Controller
     public function __construct(SchoolSessionInterface $schoolSessionRepository) {
         $this->schoolSessionRepository = $schoolSessionRepository;
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -37,7 +28,7 @@ class NoticeController extends Controller
     public function create()
     {
         $current_school_session_id = $this->getSchoolCurrentSession();
-        return view('notices.create', compact('current_school_session_id'));
+        return response()->view('notices.create', compact('current_school_session_id'));
     }
 
     /**
@@ -56,50 +47,5 @@ class NoticeController extends Controller
         } catch (\Exception $e) {
             return back()->withError($e->getMessage());
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Notice  $notice
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Notice $notice)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Notice  $notice
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Notice $notice)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Notice  $notice
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Notice $notice)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Notice  $notice
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Notice $notice)
-    {
-        //
     }
 }

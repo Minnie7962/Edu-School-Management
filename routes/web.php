@@ -21,8 +21,9 @@ use App\Http\Controllers\SchoolClassController;
 use App\Http\Controllers\GradingSystemController;
 use App\Http\Controllers\SchoolSessionController;
 use App\Http\Controllers\AssignedTeacherController;
-use App\Http\Controllers\Auth\UpdatePasswordController;
 use App\Http\Controllers\StudentAcademicInfoController;
+use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\Auth\UpdatePasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,7 +49,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('session/browse', [SchoolSessionController::class, 'browse'])->name('session.browse');
 
         Route::post('semester/create', [SemesterController::class, 'store'])->name('semester.create');
-
+        Route::post('semester/update', [SemesterController::class, 'update'])->name('semester.update');
         // Class
         Route::post('class/create', [SchoolClassController::class, 'store'])->name('class.create');
         Route::post('class/update', [SchoolClassController::class, 'update'])->name('class.update');
@@ -67,10 +68,10 @@ Route::middleware(['auth'])->group(function () {
         Route::post('teacher/assign', [AssignedTeacherController::class, 'store'])->name('teacher.assign');
 
         // Student
-        Route::post('student/create', [StudentAcademicInfoController::class, 'storeStudent'])->name('student.create');
-        Route::post('student/update', [StudentAcademicInfoController::class, 'updateStudent'])->name('student.update');
+        Route::post('student/create', [UserController::class, 'storeStudent'])->name('student.create');
+        Route::post('student/update', [UserController::class, 'updateStudent'])->name('student.update');
     });
- 
+
 
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 
@@ -86,21 +87,25 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/sections', [SectionController::class, 'getByClassId'])->name('get.sections.courses.by.classId');
     Route::get('/section/edit/{id}', [SectionController::class, 'edit'])->name('section.edit');
 
-    // Teachers
-    Route::get('/teachers/add', function () {
-        return view('teachers.add');
-    })->name('teacher.create.show');
-    Route::get('/teachers/edit/{id}', [UserController::class, 'editTeacher'])->name('teacher.edit.show');
-    Route::get('/teachers/view/list', [UserController::class, 'getTeacherList'])->name('teacher.list.show');
-    Route::get('/teachers/view/profile/{id}', [UserController::class, 'showTeacherProfile'])->name('teacher.profile.show');
+    // Teacher Routes
+Route::prefix('teachers')->name('teacher.')->group(function () {
+    Route::get('/add', [TeacherController::class, 'createTeacher'])->name('create.show');
+    Route::post('/create', [TeacherController::class, 'storeTeacher'])->name('create');
+    Route::get('/edit/{id}', [TeacherController::class, 'editTeacher'])->name('edit.show');
+    Route::post('/update', [TeacherController::class, 'updateTeacher'])->name('update');
+    Route::get('/view/list', [TeacherController::class, 'getTeacherList'])->name('list.show');
+    Route::get('/view/profile/{id}', [TeacherController::class, 'showTeacherProfile'])->name('profile.show');
+});
 
-    //Students
-    Route::get('/students/add', [StudentAcademicInfoController::class, 'createStudent'])->name('student.create.show');
-    Route::get('/students/edit/{id}', [StudentAcademicInfoController::class, 'editStudent'])->name('student.edit.show');
-    Route::get('/students/view/list', [StudentAcademicInfoController::class, 'getStudentList'])->name('student.list.show');
-    Route::get('/students/view/profile/{id}', [StudentAcademicInfoController::class, 'showStudentProfile'])->name('student.profile.show');
-    Route::get('/students/view/attendance/{id}', [AttendanceController::class, 'showStudentAttendance'])->name('student.attendance.show');
-
+// Student Routes
+Route::prefix('students')->name('student.')->group(function () {
+    Route::get('/add', [StudentAcademicInfoController::class, 'createStudent'])->name('create.show');
+    Route::post('/create', [StudentAcademicInfoController::class, 'storeStudent'])->name('create');
+    Route::get('/edit/{id}', [StudentAcademicInfoController::class, 'editStudent'])->name('edit.show');
+    Route::post('/update', [StudentAcademicInfoController::class, 'updateStudent'])->name('update');
+    Route::get('/view/list', [StudentAcademicInfoController::class, 'getStudentList'])->name('list.show');
+    Route::get('/view/profile/{id}', [StudentAcademicInfoController::class, 'showStudentProfile'])->name('profile.show');
+});
     // Marks
     Route::get('/marks/create', [MarkController::class, 'create'])->name('course.mark.create');
     Route::post('/marks/store', [MarkController::class, 'store'])->name('course.mark.store');
@@ -114,7 +119,11 @@ Route::middleware(['auth'])->group(function () {
 
     // Exams
     Route::get('/exams/view', [ExamController::class, 'index'])->name('exam.list.show');
+    // Route::get('/exams/view/history', function () {
+    //     return view('exams.history');
+    // });
     Route::post('/exams/create', [ExamController::class, 'store'])->name('exam.create');
+    // Route::post('/exams/delete', [ExamController::class, 'delete'])->name('exam.delete');
     Route::get('/exams/create', [ExamController::class, 'create'])->name('exam.create.show');
     Route::get('/exams/add-rule', [ExamRuleController::class, 'create'])->name('exam.rule.create');
     Route::post('/exams/add-rule', [ExamRuleController::class, 'store'])->name('exam.rule.store');
@@ -128,6 +137,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/exams/grade/add-rule', [GradeRuleController::class, 'store'])->name('exam.grade.system.rule.store');
     Route::get('/exams/grade/view-rules', [GradeRuleController::class, 'index'])->name('exam.grade.system.rule.show');
     Route::post('/exams/grade/delete-rule', [GradeRuleController::class, 'destroy'])->name('exam.grade.system.rule.delete');
+
 
     // Calendar events
     Route::get('calendar-event', [EventController::class, 'index'])->name('events.show');
