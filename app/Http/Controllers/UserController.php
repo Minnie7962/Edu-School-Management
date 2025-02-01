@@ -101,7 +101,7 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => 'admin', // Assign the admin role
+            'role' => 'admin',
         ]);
 
         // Redirect or return a response

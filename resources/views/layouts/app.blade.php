@@ -32,6 +32,14 @@
 
     <!-- Custom Styles -->
     <style>
+        @font-face {
+            font-family: 'Khmer OS Battambang';
+            src: url('../fonts/Khmer-OS-BTB.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+        
         :root {
             --primary-color: #2563eb;
             --primary-dark: #1e40af;
@@ -46,7 +54,7 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Khmer OS Battambang', 'Inter', sans-serif;
             background-color: var(--white);
             color: var(--text-dark);
             line-height: 1.6;
@@ -107,9 +115,11 @@
         <!-- Navigation Bar -->
         <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    <i class="fas fa-school"></i> {{ config('app.name', 'Unifiedtransform') }}
-                </a>
+            <a class="navbar-brand" href="{{ url('/') }}">
+                <img src="{{ asset('favicon_io/school.png') }}" alt="Edu-School Logo" loading="lazy" style="width: 38px; height: 40px;">
+                សាលាបឋមសិក្សាតាម៉ា
+            </a>
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -180,7 +190,7 @@
 
     <!-- Watermark -->
     <div id="watermark">
-        <p>Unifiedtransform</p>
+        <p>School Management System</p>
     </div>
 
     <!-- Bootstrap JS -->

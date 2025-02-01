@@ -15,13 +15,11 @@ use App\Http\Controllers\ExamRuleController;
 use App\Http\Controllers\SemesterController;
 use App\Http\Controllers\SyllabusController;
 use App\Http\Controllers\GradeRuleController;
-use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\SchoolClassController;
 use App\Http\Controllers\GradingSystemController;
 use App\Http\Controllers\SchoolSessionController;
-use App\Http\Controllers\AcademicSettingController;
 use App\Http\Controllers\AssignedTeacherController;
 use App\Http\Controllers\Auth\UpdatePasswordController;
 use App\Http\Controllers\StudentAcademicInfoController;
@@ -50,9 +48,6 @@ Route::middleware(['auth'])->group(function () {
         Route::post('session/browse', [SchoolSessionController::class, 'browse'])->name('session.browse');
 
         Route::post('semester/create', [SemesterController::class, 'store'])->name('semester.create');
-        Route::post('final-marks-submission-status/update', [AcademicSettingController::class, 'updateFinalMarksSubmissionStatus'])->name('final.marks.submission.status.update');
-
-        Route::post('attendance/type/update', [AcademicSettingController::class, 'updateAttendanceType'])->name('attendance.type.update');
 
         // Class
         Route::post('class/create', [SchoolClassController::class, 'store'])->name('class.create');
@@ -133,14 +128,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/exams/grade/add-rule', [GradeRuleController::class, 'store'])->name('exam.grade.system.rule.store');
     Route::get('/exams/grade/view-rules', [GradeRuleController::class, 'index'])->name('exam.grade.system.rule.show');
     Route::post('/exams/grade/delete-rule', [GradeRuleController::class, 'destroy'])->name('exam.grade.system.rule.delete');
-
-    // Promotions
-    Route::get('/promotions/index', [PromotionController::class, 'index'])->name('promotions.index');
-    Route::get('/promotions/promote', [PromotionController::class, 'create'])->name('promotions.create');
-    Route::post('/promotions/promote', [PromotionController::class, 'store'])->name('promotions.store');
-
-    // Academic settings
-    Route::get('/academics/settings', [AcademicSettingController::class, 'index'])->name('academics.settings');
 
     // Calendar events
     Route::get('calendar-event', [EventController::class, 'index'])->name('events.show');

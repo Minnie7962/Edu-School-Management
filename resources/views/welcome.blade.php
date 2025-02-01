@@ -13,6 +13,11 @@
     <link rel="icon" href="{{asset('favicon_io/android-chrome-192x192.png')}}" sizes="192x192">
     <link rel="icon" href="{{asset('favicon_io/android-chrome-512x512.png')}}" sizes="512x512">
     
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="សាលាបឋមសិក្សាតាម៉ា - ដំណោះស្រាយមួយសម្រាប់ការគ្រប់គ្រងស្ថាប័នអប់រំប្រកបដោយប្រសិទ្ធភាព និងទំនើបកម្ម។">
+    <meta name="keywords" content="school management, education, សាលាបឋមសិក្សាតាម៉ា, គ្រប់គ្រងសាលា">
+    <meta name="author" content="Edu-School Management">
+    
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     
@@ -26,6 +31,7 @@
             src: url('../fonts/Khmer-OS-BTB.ttf') format('truetype');
             font-weight: normal;
             font-style: normal;
+            font-display: swap;
         }
 
         :root {
@@ -45,6 +51,10 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
@@ -293,13 +303,18 @@
     </style>
 </head>
 <body>
+    <!-- Loading Animation -->
+    <div id="loading" class="fixed inset-0 bg-white flex items-center justify-center z-50">
+        <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+    </div>
+
     <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="container navbar-content">
             <a href="#" class="logo">
-                <img src="{{asset('favicon_io/school.png')}}" alt="Edu-School Logo">
+                <img src="{{asset('favicon_io/school.png')}}" alt="Edu-School Logo" loading="lazy">
             </a>
-            <button class="mobile-menu-btn">
+            <button class="mobile-menu-btn" aria-label="Toggle Menu">
                 <i class="fas fa-bars"></i>
             </button>
             <ul class="nav-links">
